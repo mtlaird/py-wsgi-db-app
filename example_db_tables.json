@@ -1,0 +1,36 @@
+{"db_tables": {
+    "directors": {
+        "columns": [
+            {"name": "director_id",
+             "type": "INTEGER PRIMARY KEY AUTOINCREMENT"},
+            {"name": "director_name",
+             "type": "TEXT",
+             "desc": "Director Name"}
+        ],
+        "index_column": ["director_id"],
+        "joined_tables": [],
+        "label": "Directors"
+    },
+    "movies": {
+        "columns": [
+            {"name": "movie_id",
+             "type": "INTEGER PRIMARY KEY AUTOINCREMENT"},
+            {"name": "movie_name",
+             "type": "TEXT",
+             "desc": "Movie Name"},
+            {"name": "year",
+             "type": "INTEGER",
+             "desc": "Year Released"},
+            {"name": "director_id",
+             "type": "INTEGER",
+             "desc": "Director"}
+        ],
+        "index_column": ["movie_id"],
+        "joined_tables": [{
+            "table": "directors",
+            "column": "director_id",
+            "label": "director_name"
+        }],
+        "label": "Movies"
+    }}
+  }

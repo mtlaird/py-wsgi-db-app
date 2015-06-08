@@ -9,7 +9,8 @@
         ],
         "index_column": ["director_id"],
         "joined_tables": [],
-        "label": "Directors"
+        "label": "Directors",
+        "unique_columns": ["director_name"]
     },
     "movies": {
         "columns": [
@@ -31,6 +32,7 @@
             "column": "director_id",
             "label": "director_name"
         }],
-        "label": "Movies"
+        "label": "Movies",
+        "unique_columns": ["director_name", "movie_name"]
     }}
   }

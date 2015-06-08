@@ -57,7 +57,7 @@ def application(environ, start_response):
         web_response.set_content_type('javascript')
 
     else:
-        web_response.set_status('Not found')
+        web_response.set_status('Not Found')
         web_response.add_body(default_web.not_found_error_page())
 
     web_response.make_headers()

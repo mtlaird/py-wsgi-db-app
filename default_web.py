@@ -69,7 +69,7 @@ def list_rows_for_editing_page(table_name):
             row_to_add.append(''.join(edit_form.return_form()))
             row_to_add.append(''.join(delete_form.return_form()))
             entries_table.add_row(row_to_add)
-            output.extend(entries_table.return_table())
+        output.extend(entries_table.return_table())
 
     output.append("<p><a href='/'>Return to the main page.</a></p>")
 

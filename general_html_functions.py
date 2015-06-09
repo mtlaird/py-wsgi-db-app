@@ -69,10 +69,13 @@ class HtmlForm():
 class HtmlTable():
     table_class_default = "<table>"
 
-    def __init__(self, columns=[], table_id=None):
+    def __init__(self, columns=None, table_id=None):
         self.body_rows = []
         self.header = []
-        self.columns = columns
+        if columns is None:
+            self.columns = []
+        else:
+            self.columns = columns
         self.make_header(self.columns)
         self.table_class = self.table_class_default
         self.close_table = "</table>"

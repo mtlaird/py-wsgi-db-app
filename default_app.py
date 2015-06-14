@@ -4,7 +4,7 @@ from wsgiref.simple_server import make_server
 from pprint import pformat
 import urlparse
 import default_web
-from general_sqlite_db_functions import db_tables, check_schema
+from default_app_db import db_tables, check_schema
 
 
 def get_form_data(wsgi_input, content_length):
@@ -23,7 +23,7 @@ def application(environ, start_response):
                        'html_wrapper_close': '</div>',
                        'bootstrap': 'true'}
     web_response = default_web.WebResponse(response_params)
-    web_response.add_head("<script src='/general_js_functions.js'></script>")
+    web_response.add_head("<script src='/general/js_functions.js'></script>")
 
     default_web.HtmlTable.table_class_default = 'table table-striped table-bordered'
 
@@ -50,8 +50,8 @@ def application(environ, start_response):
         form_data = get_form_data(environ['wsgi.input'], int(environ['CONTENT_LENGTH']))
         web_response.add_body(default_web.delete_db_row_page(request_path[:-7], form_data))
 
-    elif request_path == 'general_js_functions.js':
-        with open('general_js_functions.js') as f:
+    elif request_path == 'general/js_functions.js':
+        with open('general/js_functions.js') as f:
             web_response.add_body(f.readlines())
 
         web_response.set_content_type('javascript')

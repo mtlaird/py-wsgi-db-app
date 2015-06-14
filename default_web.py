@@ -1,6 +1,6 @@
 __author__ = 'mlaird'
 import default_app_db
-from general_html_functions import *
+from general.html_functions import *
 
 
 def main_page():
@@ -119,6 +119,7 @@ def delete_db_row_page(table_name, form_data):
     output.append("<p><a href='/'>Return to the main page.</a></p>")
 
     return output
+
 
 def not_found_error_page():
     output = ["<p>This page could not be found.</p>"]

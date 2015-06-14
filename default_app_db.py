@@ -1,2 +1,2 @@
-from general_sqlite_db_functions import *
+from general.sqlite_db_functions import *
 

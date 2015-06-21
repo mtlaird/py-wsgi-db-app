@@ -121,6 +121,14 @@ def make_select_command(table_name):
     return select_command
 
 
+def make_complex_select_command(table_name, additional_joins):
+    select_command = make_select_command(table_name)
+    for j in additional_joins:
+        select_command += "INNER JOIN %s ON %s = %s " % (j['joined_table'], j['left_join'], j['right_join'])
+
+    return select_command
+
+
 def make_update_command(table_name):
     update_command = "UPDATE %s SET " % table_name
     first_entry = True
@@ -158,12 +166,15 @@ def make_delete_command(table_name):
     return delete_command
 
 
-def get_subset_table_rows(table_name, conditions):
+def get_subset_table_rows(table_name, conditions, additional_joins=None):
     global cur
     if not cur:
         return False
 
-    select_command = make_select_command(table_name)
+    if not additional_joins:
+        select_command = make_select_command(table_name)
+    else:
+        select_command = make_complex_select_command(table_name, additional_joins)
     first_item = True
     for c in conditions:
         if first_item:

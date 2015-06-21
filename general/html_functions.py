@@ -1,6 +1,5 @@
 __author__ = 'mtk-user'
 
-# import general_sqlite_db_functions
 import copy
 
 
@@ -85,7 +84,10 @@ class HtmlTable():
         if len(columns) > 0:
             header_html = "<thead><tr id=headerRow>"
             for c in columns:
-                header_html += "<th id='%s'>%s</th>" % (c['desc'].replace(' ', '_'), c['desc'])
+                if type(c) is dict:
+                    header_html += "<th id='%s'>%s</th>" % (c['desc'].replace(' ', '_'), c['desc'])
+                elif type(c) is str:
+                    header_html += "<th id='%s'>%s</th>" % (c.replace(' ', '_'), c)
             header_html += "</tr></thead>"
         else:
             header_html = ""

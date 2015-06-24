@@ -166,7 +166,7 @@ def make_delete_command(table_name):
     return delete_command
 
 
-def get_subset_table_rows(table_name, conditions, additional_joins=None):
+def get_subset_table_rows(table_name, conditions, additional_joins=None, order_and_limit=None):
     global cur
     if not cur:
         return False
@@ -186,6 +186,19 @@ def get_subset_table_rows(table_name, conditions, additional_joins=None):
             select_command += "%s = '%s' " % (c.keys()[0], c[c.keys()[0]][0])
         elif type(c[c.keys()[0]]) is str or type(c[c.keys()[0]]) is int:
             select_command += "%s = '%s' " % (c.keys()[0], c[c.keys()[0]])
+
+    if order_and_limit:
+        if order_and_limit['order']:
+            first_item = True
+            for o in order_and_limit['order']:
+                if first_item:
+                    first_item = False
+                    select_command += 'ORDER BY '
+                else:
+                    select_command += ', '
+                select_command += '%s ' % o
+        if order_and_limit['limit']:
+            select_command += 'LIMIT %s ' % order_and_limit['limit']
 
     try:
         cur.execute(select_command)

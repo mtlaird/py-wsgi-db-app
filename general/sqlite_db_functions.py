@@ -188,7 +188,7 @@ def get_subset_table_rows(table_name, conditions, additional_joins=None, order_a
             select_command += "%s = '%s' " % (c.keys()[0], c[c.keys()[0]])
 
     if order_and_limit:
-        if order_and_limit['order']:
+        if 'order' in order_and_limit.keys():
             first_item = True
             for o in order_and_limit['order']:
                 if first_item:
@@ -197,7 +197,7 @@ def get_subset_table_rows(table_name, conditions, additional_joins=None, order_a
                 else:
                     select_command += ', '
                 select_command += '%s ' % o
-        if order_and_limit['limit']:
+        if 'limit' in order_and_limit.keys():
             select_command += 'LIMIT %s ' % order_and_limit['limit']
 
     try:

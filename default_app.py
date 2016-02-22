@@ -50,6 +50,20 @@ def application(environ, start_response):
         form_data = get_form_data(environ['wsgi.input'], int(environ['CONTENT_LENGTH']))
         web_response.add_body(default_web.delete_db_row_page(request_path[:-7], form_data))
 
+    elif request_path[:3] == 'api' and request_path[4:] in db_tables:
+        web_response.set_content_type('json')
+        if environ['REQUEST_METHOD'] == 'GET':
+            web_response.add_body(default_web.api_get(request_path[4:]))
+        elif environ['REQUEST_METHOD'] == 'POST':
+            form_data = get_form_data(environ['wsgi.input'], int(environ['CONTENT_LENGTH']))
+            web_response.add_body(default_web.api_post(request_path[4:], form_data))
+        elif environ['REQUEST_METHOD'] == 'PUT':
+            form_data = get_form_data(environ['wsgi.input'], int(environ['CONTENT_LENGTH']))
+            web_response.add_body(default_web.api_put(request_path[4:], form_data))
+        elif environ['REQUEST_METHOD'] == 'DELETE':
+            form_data = get_form_data(environ['wsgi.input'], int(environ['CONTENT_LENGTH']))
+            web_response.add_body(default_web.api_delete(request_path[4:], form_data))
+
     elif request_path == 'general/js_functions.js':
         with open('general/js_functions.js') as f:
             web_response.add_body(f.readlines())

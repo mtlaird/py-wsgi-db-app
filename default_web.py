@@ -1,5 +1,6 @@
 __author__ = 'mlaird'
 import default_app_db
+import json
 from general.html_functions import *
 
 
@@ -125,3 +126,36 @@ def not_found_error_page():
     output = ["<p>This page could not be found.</p>"]
 
     return output
+
+
+def api_get(table_name):
+    rows = default_app_db.get_all_table_rows(table_name)
+    output = json.dumps(rows)
+    return output
+
+
+def api_post(table_name, form_data):
+    result = default_app_db.add_table_row(table_name, form_data)
+    if result:
+        output = {"status": "success"}
+    else:
+        output = {"status": "error"}
+    return json.dumps(output)
+
+
+def api_put(table_name, form_data):
+    result = default_app_db.update_table_row(table_name, form_data)
+    if result:
+        output = {"status": "success"}
+    else:
+        output = {"status": "error"}
+    return json.dumps(output)
+
+
+def api_delete(table_name, form_data):
+    result = default_app_db.delete_table_row(table_name, form_data)
+    if result:
+        output = {"status": "success"}
+    else:
+        output = {"status": "error"}
+    return json.dumps(output)

@@ -3,7 +3,7 @@ __author__ = 'mtk-user'
 import copy
 
 
-class HtmlForm():
+class HtmlForm:
     def __init__(self):
         self.html = []
         self.open_form = "<form method='post'>"
@@ -65,7 +65,7 @@ class HtmlForm():
         return full_html
 
 
-class HtmlTable():
+class HtmlTable:
     table_class_default = "<table>"
 
     def __init__(self, columns=None, table_id=None):
@@ -122,7 +122,7 @@ class HtmlTable():
         return full_html
 
 
-class DocumentReadyFunction():
+class DocumentReadyFunction:
     def __init__(self):
         self.script = []
         self.open_script = "<script type='text/javascript'> $(document).ready(function() {\n"
